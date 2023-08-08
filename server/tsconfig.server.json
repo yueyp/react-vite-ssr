@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
-    "esModuleInterop": true,
-    "moduleResolution": "Node",
     "composite": true,
     "skipLibCheck": true,
-    "module": "ES2020",
+    "rootDir": "./",
+    "outDir": "../dist-server",
+    "module": "CommonJS",
+    "target": "ESNext",
     "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "strictNullChecks": true,
     "allowJs": true
   },
-  "include": ["vite.config.ts", "./server/**/*"]
 }
