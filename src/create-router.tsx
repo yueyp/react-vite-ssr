@@ -51,13 +51,7 @@ export function createRouter() {
   //   element: <NotFoundComp />,
   // });
 
-  const router = createBrowserRouter(routes, {
-    basename: '/',
-  });
-
-
   return {
-    router,
     routes,
   };
 }

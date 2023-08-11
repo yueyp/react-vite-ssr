@@ -38,3 +38,5 @@ ts-node-dev -P ./server/tsconfig.server.json --respawn --transpile-only server/i
 
 `--transpile-only` 提供了更快的编译速度
 
+### 四、对前端页面进行初步的服务端渲染
+> 参考文档：https://reactrouter.com/en/main/guides/ssr

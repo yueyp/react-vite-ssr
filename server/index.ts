@@ -2,6 +2,7 @@ import express from 'express'
 import { createServer as createViteServer } from 'vite'
 import { apiIndexRouter } from './api/index-api';
 import { resolve } from 'path'
+import { ssrHandler } from './ssr-utils';
 
 export async function createApp() {
   const app = express();
@@ -21,9 +22,9 @@ export async function createApp() {
   // 使用app.use()注册路由，并添加统一的访问前缀 /api
   app.use('/api', apiIndexRouter)
 
-  // app.use('*', async (req, res) => {
-  //   // 服务 index.html - 下面我们来处理这个问题
-  // });
+  app.get('*', async (req, res) => {
+    ssrHandler(req, res, vite);
+  });
 
   return app
 }
