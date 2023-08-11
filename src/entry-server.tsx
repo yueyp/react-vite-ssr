@@ -6,6 +6,7 @@ import ReactDOMServer from 'react-dom/server'
 import App from "./App";
 import { createFetchRequest } from "./plugins/fetch-request";
 import { ServerStyleSheet } from "styled-components";
+import { HelmetProvider, HelmetServerState } from "react-helmet-async";
 
 const { routes } = createRouter()
 // 使用createStaticHandler为路由加载数据
@@ -26,13 +27,19 @@ async function renderPage({
 
     const sheet = new ServerStyleSheet();
 
+    const helmetContext: {
+        helmet?: HelmetServerState
+    } = {};
+
     /**
      * 进行渲染
      * context 是createStaticHandler().query()调用返回的上下文，其中包含为请求获取的所有数据。
      */
     const html = ReactDOMServer.renderToString(sheet.collectStyles(
         <App>
-            <StaticRouterProvider router={router} context={context} />
+            <HelmetProvider context={helmetContext}>
+                <StaticRouterProvider router={router} context={context} />
+            </HelmetProvider>
         </App>
     ));
 

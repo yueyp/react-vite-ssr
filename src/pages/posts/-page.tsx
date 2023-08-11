@@ -1,6 +1,7 @@
 import ArticleList from "./article-list";
 import styled from 'styled-components'
 import { ActionFunction, LoaderFunction, useLoaderData } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 export interface PostsItem {
   id: number;
   time: string;
@@ -24,8 +25,11 @@ export default function Page() {
   } = useLoaderData() as {
     postsList: PostsItem[]
   };
-  
+
   return <StyledDiv>
+    <Helmet>
+      <title>文章列表</title>
+    </Helmet>
     <h2>
       文章列表页
     </h2>
@@ -43,7 +47,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
   const urlOrigin = import.meta.env.SSR ? 'http://127.0.0.1:5000' : '';
 
-  const rsp = await fetch(urlOrigin + '/api/posts/list',{
+  const rsp = await fetch(urlOrigin + '/api/posts/list', {
     signal: request.signal,
     headers: {
       ...request.headers,

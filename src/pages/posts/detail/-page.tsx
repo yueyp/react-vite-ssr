@@ -2,6 +2,7 @@ import { PostsItem } from "../-page"
 import { styled } from "styled-components"
 import { ArticleDetail } from "./article-detail"
 import { LoaderFunction, useLoaderData } from "react-router-dom"
+import { Helmet } from "react-helmet-async"
 
 const StyledDiv = styled.div`
   
@@ -14,7 +15,13 @@ export default function Page() {
 
   return <StyledDiv>
     {
-      !!articleData && <ArticleDetail article={articleData}></ArticleDetail>
+      !!articleData && <>
+        <Helmet>
+          <title>{articleData.title}</title>
+          <meta name="keywords" content={articleData.keywords.join(',')} />
+        </Helmet>
+        <ArticleDetail article={articleData}></ArticleDetail>
+      </>
     }
     {
       articleData === null && <h3>文章不存在</h3>
@@ -37,8 +44,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   const id = url.searchParams.get('id');
 
   const urlOrigin = import.meta.env.SSR ? 'http://127.0.0.1:5000' : '';
-  
-  const rsp = await fetch(urlOrigin + '/api/posts/detail?id=' + id,{
+
+  const rsp = await fetch(urlOrigin + '/api/posts/detail?id=' + id, {
     signal: request.signal,
     headers: {
       ...request.headers,
