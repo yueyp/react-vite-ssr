@@ -40,3 +40,8 @@ ts-node-dev -P ./server/tsconfig.server.json --respawn --transpile-only server/i
 
 ### 四、对前端页面进行初步的服务端渲染
 > 参考文档：https://reactrouter.com/en/main/guides/ssr
+
+### 五. 在服务端进行数据请求
+* 服务端的axios实例，cookie和header的处理
+* 拆分客户端和服务端axios的实例
+* 数据预请求函数

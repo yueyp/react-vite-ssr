@@ -1,6 +1,5 @@
 import type { FunctionComponent } from 'react';
-import type { RouteObject } from 'react-router-dom'
-import {createBrowserRouter } from 'react-router-dom'
+import type { ActionFunction, LoaderFunction, RouteObject } from 'react-router-dom'
 
 
 export function createRouter() {
@@ -28,9 +27,14 @@ export function createRouter() {
         path: `/${routerPath}`,
         errorElement: <div>出错了</div>,
         async lazy() {
-          const t = (await (pages[path]())) as { default: FunctionComponent<unknown> };
+          const t = (await (pages[path]())) as { 
+            default: FunctionComponent<unknown>,
+            loader?: LoaderFunction,
+            action?: ActionFunction, };
           return {
-            Component: t.default
+            Component: t.default,
+            loader: t.loader,
+            action: t.action
           };
         },
       });
