@@ -33,10 +33,8 @@ apiPostsRouter.use('/detail', (req, res) => {
     return;
   }
 
-
-
   res.json({
-    success: false,
+    success: true,
     message: '文章未找到',
     data: null
   })

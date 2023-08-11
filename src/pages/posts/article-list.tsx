@@ -14,7 +14,7 @@
  * 
  */
 import styled from 'styled-components';
-import { PostsItem } from '../../api/posts';
+import { PostsItem } from './-page';
 import { NavLink } from 'react-router-dom';
 
 const ArticleListWrapper = styled.div`
