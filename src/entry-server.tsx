@@ -5,7 +5,7 @@ import { createRouter } from "./create-router";
 import ReactDOMServer from 'react-dom/server'
 import App from "./App";
 import { createFetchRequest } from "./plugins/fetch-request";
-
+import { ServerStyleSheet } from "styled-components";
 
 const { routes } = createRouter()
 // 使用createStaticHandler为路由加载数据
@@ -23,19 +23,21 @@ async function renderPage({
         routerHandler.dataRoutes,
         context
     );
-     
+
+    const sheet = new ServerStyleSheet();
+
     /**
      * 进行渲染
      * context 是createStaticHandler().query()调用返回的上下文，其中包含为请求获取的所有数据。
      */
-    const html = ReactDOMServer.renderToString(
+    const html = ReactDOMServer.renderToString(sheet.collectStyles(
         <App>
             <StaticRouterProvider router={router} context={context} />
         </App>
-    );
+    ));
 
     // 5. 注入渲染后的应用程序 HTML 到模板中。
-    const content = template.replace('<!--app-html-->', html);
+    const content = template.replace('<!--app-html-->', html).replace('<!--server-style-sheet--->', sheet.getStyleTags());
 
     return {
         content,

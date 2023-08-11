@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import { createRouter } from './create-router.tsx'
 import { RouterProvider, createBrowserRouter, matchRoutes } from 'react-router-dom'
-import './index.css'
 
 async function render() {
 

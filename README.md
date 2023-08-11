@@ -45,3 +45,8 @@ ts-node-dev -P ./server/tsconfig.server.json --respawn --transpile-only server/i
 * 服务端的axios实例，cookie和header的处理
 * 拆分客户端和服务端axios的实例
 * 数据预请求函数
+
+## 六. css样式的直出，styled-components的样式的直出，避免页面样式闪动
+
+相关资料：
+https://styled-components.com/docs/advanced#server-side-rendering

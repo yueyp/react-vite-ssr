@@ -1,3 +1,7 @@
+import { createGlobalStyle } from "styled-components";
+
+// 使用createGlobalStyle创建全局样式
+export const GlobalCss = createGlobalStyle`
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -25,10 +29,7 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
-  min-height: 100vh;
 }
 
 h1 {
@@ -67,3 +68,4 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+`
