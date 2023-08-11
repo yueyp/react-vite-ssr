@@ -36,16 +36,28 @@ async function renderPage({
      * context 是createStaticHandler().query()调用返回的上下文，其中包含为请求获取的所有数据。
      */
     const html = ReactDOMServer.renderToString(sheet.collectStyles(
-        <App>
-            <HelmetProvider context={helmetContext}>
+        <HelmetProvider context={helmetContext}>
+            <App>
                 <StaticRouterProvider router={router} context={context} />
-            </HelmetProvider>
-        </App>
+            </App>
+        </HelmetProvider>
     ));
 
     // 5. 注入渲染后的应用程序 HTML 到模板中。
-    const content = template.replace('<!--app-html-->', html).replace('<!--server-style-sheet--->', sheet.getStyleTags());
+    let content = template.replace('<!--app-html-->', html).replace('<!--server-style-sheet--->', sheet.getStyleTags());
 
+    const { helmet } = helmetContext;
+    console.log( helmet.title.toString(),"ffffffffffffffffffffffff")
+    if (helmet) {
+
+      content = content.replace('<!--helmet-meta-->', helmet.meta.toString())
+        .replace('<!--helmet-title-->', helmet.title.toString())
+        .replace('<!--helmet-link-->', helmet.link.toString())
+        .replace('<!--helmet-style-->', helmet.style.toString())
+        .replace('<!--helmet-script-->', helmet.script.toString())
+        .replace('-helmet-body-attrs-', helmet.bodyAttributes.toString());
+    }
+  
     return {
         content,
         statusCode: context.statusCode,

@@ -54,3 +54,16 @@ https://styled-components.com/docs/advanced#server-side-rendering
 ## 七. title的直出，meta标签的直出
 
 react-helmet-async
+
+```jsx
+<HelmetProvider context={helmetContext}></HelmetProvider>
+```
+
+```js
+content = content.replace('<!--helmet-meta-->', helmetContext.helmet.meta.toString())
+      .replace('<!--helmet-title-->', helmetContext.helmet.title.toString())
+      .replace('<!--helmet-link-->', helmetContext.helmet.link.toString())
+      .replace('<!--helmet-style-->', helmetContext.helmet.style.toString())
+      .replace('<!--helmet-script-->', helmetContext.helmet.script.toString())
+      .replace('-helmet-body-attrs-', helmetContext.helmet.bodyAttributes.toString());
+```
